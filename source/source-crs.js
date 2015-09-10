@@ -55,11 +55,19 @@
 
 		var defaultSelectedValue = countryElement.getAttribute("data-default-value");
 		var customValue = countryElement.getAttribute("data-value");
+		var countryOption = countryElement.getAttribute("data-country-option");
 		var foundIndex = 0;
 
     if (_showEmptyCountryOption) {
       countryElement.options[0] = new Option(defaultOptionStr, '');
     }
+    	if (countryOption) {
+    	 	countryOption = countryOption.split(',')
+    	 	_data = _data.filter(function(value){
+    			return (countryOption.indexOf(value[1]) >= 0 )
+    		});
+    	};
+
 		for (var i=0; i<_data.length; i++) {
 			var val = (customValue === "2-char") ? _data[i][1] : _data[i][0];
 			countryElement.options[countryElement.length] = new Option(_data[i][0], val);
